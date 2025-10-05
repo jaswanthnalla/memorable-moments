@@ -1,0 +1,8 @@
+* { box-sizing: border-box; }
+:root { scroll-padding-top: 90px; }
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: #0b1120; color: #e2e8f0; }
+.navbar { position: fixed; top: 0; left: 0; right: 0; backdrop-filter: blur(8px); background: rgba(2,6,23,0.6); z-index: 1000; }
+.nav-container { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; }
+.logo { height: 40px; border-radius: 6px; }
+.hero { height: 100vh; position: relative; padding-top: 0; }
+.portfolio { min-height: 120vh; padding: 2rem 1rem; }

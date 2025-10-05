@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Memorable Moments Photography</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="hero.css" />
+  <link rel="preload" href="https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <img src="images/mm logo.jpg" alt="logo" class="logo" />
+      <ul>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="text-pressure-container"><h1 id="text-pressure-title">Memorable Moments Photography</h1></div>
+    </div>
+  </section>
+
+  <section id="portfolio" class="portfolio">
+    <div class="scroll-indicator">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <!-- Portfolio content goes here -->
+  </section>
+
+  <script>
+    (function() {
+      const title = document.getElementById('text-pressure-title');
+      const text = title.textContent;
+      title.textContent = '';
+      const spans = [];
+      for (const ch of text) {
+        const s = document.createElement('span');
+        s.textContent = ch;
+        title.appendChild(s);
+        spans.push(s);
+      }
+      let mx = 0, my = 0, sx = 0, sy = 0;
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const onMove = e => {
+        const p = e.touches ? e.touches[0] : e;
+        mx = p.clientX; my = p.clientY;
+      };
+      window.addEventListener('mousemove', onMove, { passive: true });
+      window.addEventListener('touchmove', onMove, { passive: true });
+      function frame() {
+        sx = lerp(sx, mx, 0.15);
+        sy = lerp(sy, my, 0.15);
+        for (const s of spans) {
+          const rect = s.getBoundingClientRect();
+          const cx = rect.left + rect.width/2;
+          const cy = rect.top + rect.height/2;
+          const dx = sx - cx;
+          const dy = sy - cy;
+          const d = Math.hypot(dx, dy);
+          const max = 320;
+          const t = Math.max(0, 1 - d / max);
+          const wdth = 5 + t * (200 - 5);
+          const wght = 100 + t * (900 - 100);
+          const ital = t * 1;
+          s.style.fontVariationSettings = `'wdth' ${wdth}, 'wght' ${wght}, 'ital' ${ital}`;
+          s.style.opacity = 1;
+        }
+        requestAnimationFrame(frame);
+      }
+      frame();
+    })();
+  </script>
+</body>
+</html>
