@@ -1,0 +1,113 @@
+<svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Metallic gradients -->
+    <linearGradient id="metallicSilver" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f8ff;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#e6e6fa;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#c0c0c0;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#a9a9a9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#808080;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="metallicGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#ffed4e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#ffb347;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#cd853f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Animated shimmer effect -->
+    <linearGradient id="shimmerEffect" x1="-100%" y1="0%" x2="100%" y2="0%" gradientUnits="objectBoundingBox">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+      <stop offset="40%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+      <stop offset="50%" style="stop-color:rgba(255,255,255,0.8);stop-opacity:1" />
+      <stop offset="60%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+      <animateTransform attributeName="gradientTransform" type="translate" values="-200 0;400 0;-200 0" dur="3s" repeatCount="indefinite"/>
+    </linearGradient>
+    
+    <filter id="metallicShine" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feSpecularLighting result="specOut" in="blur" specularConstant="2" specularExponent="25" lighting-color="white">
+        <fePointLight x="-5000" y="-10000" z="20000">
+          <animate attributeName="x" values="-5000;5000;-5000" dur="4s" repeatCount="indefinite"/>
+          <animate attributeName="y" values="-10000;-8000;-10000" dur="4s" repeatCount="indefinite"/>
+        </fePointLight>
+      </feSpecularLighting>
+      <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut2"/>
+      <feComposite in="SourceGraphic" in2="specOut2" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+    
+    <!-- Live reflection overlay -->
+    <rect id="reflectionOverlay" width="100%" height="100%" fill="url(#shimmerEffect)" opacity="0.3" style="mix-blend-mode: overlay;"/>
+    
+    <!-- Interactive lighting overlay -->
+    <rect x="0" y="0" width="100%" height="100%" fill="url(#interactiveLighting)" opacity="0.5" class="interactive-overlay"/>
+    
+    <!-- Additional gradient for interactive lighting -->
+    <radialGradient id="interactiveLighting" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8">
+        <animate attributeName="stop-opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="30%" stop-color="#ffd700" stop-opacity="0.4">
+        <animate attributeName="stop-opacity" values="0.1;0.4;0.1" dur="2s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+      <animateTransform attributeName="gradientTransform" type="translate" values="-20,-20;20,20;-20,-20" dur="3s" repeatCount="indefinite"/>
+    </radialGradient>
+    
+    <style>
+      .logo-text {
+        font-family: 'Brush Script MT', cursive, serif;
+        font-size: 48px;
+        fill: url(#metallicGold);
+        font-weight: normal;
+        filter: url(#metallicShine);
+      }
+      .camera-frame {
+        fill: none;
+        stroke: url(#metallicSilver);
+        stroke-width: 3;
+        filter: url(#metallicShine);
+      }
+      .lens-circle {
+        fill: none;
+        stroke: url(#metallicSilver);
+        stroke-width: 2;
+        filter: url(#metallicShine);
+      }
+    </style>
+  </defs>
+  
+  <!-- Black background -->
+  <rect width="400" height="200" fill="#000000"/>
+  
+  <!-- Camera frame icon -->
+  <g transform="translate(30, 60)">
+    <!-- Camera body -->
+    <rect x="0" y="20" width="80" height="50" rx="5" class="camera-frame"/>
+    <!-- Camera lens -->
+    <circle cx="40" cy="45" r="15" class="camera-frame"/>
+    <!-- Camera viewfinder -->
+    <rect x="25" y="10" width="30" height="15" rx="3" class="camera-frame"/>
+    <!-- Camera flash -->
+    <rect x="60" y="15" width="8" height="8" rx="2" class="camera-frame"/>
+  </g>
+  
+  <!-- Main text "Memorable Moments" -->
+  <text x="140" y="120" class="logo-text" style="font-size: 42px;">Memorable Moments</text>
+  
+  <!-- Decorative lens circle -->
+  <circle cx="360" cy="100" r="25" class="lens-circle"/>
+  <circle cx="360" cy="100" r="15" class="lens-circle"/>
+  <circle cx="360" cy="100" r="8" fill="#4a9eff" opacity="0.3"/>
+  
+  <!-- Subtle grid pattern overlay -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#333" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="200" fill="url(#grid)"/>
+</svg>
